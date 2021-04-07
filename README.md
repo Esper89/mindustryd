@@ -33,6 +33,16 @@ sudo apt install git python3 python3-pip
 
 You'll also need java to run the mindustry server, but I assume you solved this already :)
 
+#### Install mindustry server
+
+You can follow the [guide on the mindustry wiki](https://mindustrygame.github.io/wiki/servers/) for downloading the mindustry server.
+
+Once downloaded, create the server directory and move the `server.jar` to it:
+```bash
+sudo mkdir -p /srv/mindustryd
+sudo mv server.jar /srv/mindustryd/server.jar
+```
+
 #### Basic setup
 
 First, clone the repo, and install mindustryd:
@@ -56,7 +66,7 @@ sudo nano /etc/mindustryd.json
 {
 
         "server": { // configurations related to your server
-                "server_path" : "/opt/mindustry", // the path that contains your mindustry server
+                "server_path" : "/srv/mindustry", // the path that contains your mindustry server
                 "server_jar" : "server.jar", // the name of your server's jar file
                 "java" : "java", // the command which launches java (usually java)
 
@@ -99,28 +109,19 @@ But you need to add it to your init system
 
 **If you are fine with the basic setup, you should change the** `"console_socket_path"` **entry in the above config to** `/tmp/md.sock` **otherwise the daemon will fail to start, since we not created the default directory yet!**
 
-#### Set up the mindustry world
-
-Run the mindustry server:
-```bash
-java -jar /opt/mindustry/server.jar
-```
-
-Change the server config or rules, if you would like to.
-Then, create and save the world:
-```
-host MAPNAME MODE
-save world
-exit
-```
-
 #### Installing systemd service
 
 Now we need an user, that runs the mindustry server, and a system group which members are allowed to attach to the the console.
 
 ```bash
 sudo groupadd -r mindustry
-sudo useradd -d "YOUR MINDUSTRY SERVER DIRECTORY" -M -r -s /bin/false -g mindustry mindustry
+sudo useradd -d "/srv/mindustry" -M -r -s /bin/false -g mindustry mindustry
+```
+
+Set this user as the owner of the server directory:
+
+```bash
+sudo chown -R mindustry:mindustry /srv/mindustry
 ```
 
 After that we should create the directory for the daemon's socket. (see the config above)
@@ -138,7 +139,24 @@ Copy the systemd unit file to it's place:
 sudo cp mindustryd.service.example /etc/systemd/system/mindustryd.service
 ```
 
-And then enable and start it:
+#### Set up the mindustry world
+
+Run the mindustry server directly:
+```bash
+java -jar /srv/mindustry/server.jar
+```
+
+Change the server config or rules, if you would like to.
+Then, create and save the world:
+```
+host MAPNAME MODE
+save world
+exit
+```
+
+#### Start the daemon
+
+Enable and start the service:
 ```bash
 sudo systemctl daemon-reload
 sudo systemctl enable mindustryd

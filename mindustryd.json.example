@@ -1,7 +1,7 @@
 {
 
 	"server": {
-		"server_path" : "/opt/mindustry",
+		"server_path" : "/srv/mindustry",
 		"server_jar" : "server.jar",
 		"java" : "java",
 
