@@ -78,8 +78,8 @@ sudo nano /etc/mindustryd.json
                         "-XX:MaxGCPauseMillis=50",
                         "-XX:G1HeapRegionSize=16M",
                         "-server",
-                        "-Xms4G",
-                        "-Xmx6G"
+                        "-Xms1G",
+                        "-Xmx2G"
                 ],
                 
                 "startup_commands" : [ // commands to run, when the daemon is started up
