@@ -1,5 +1,7 @@
 # mindustryd
 
+***Note:*** _This repository is a fork of [marcsello/minecraftd](https://github.com/marcsello/minecraftd)._
+
 Mindustry server daemonizer for systemd compatiblity
 
 ## What dis?
@@ -35,7 +37,7 @@ You'll also need java to run the mindustry server, but I assume you solved this 
 
 First, clone the repo, and install mindustryd:
 ```bash
-git clone https://github.com/marcsello/mindustryd.git
+git clone https://github.com/Esper89/mindustryd.git
 cd mindustryd
 sudo ./install.sh
 ```
@@ -95,7 +97,22 @@ sudo nano /etc/mindustryd.json
 **You are done with the basic configuration of mindustryd**  
 But you need to add it to your init system
 
-**If you are fine with the basic setup, you should change the** `"console_socket_path"` **entry in the above config to** `/tmp/mc.sock` **otherwise the daemon will fail to start, since we not created the default directory yet!**
+**If you are fine with the basic setup, you should change the** `"console_socket_path"` **entry in the above config to** `/tmp/md.sock` **otherwise the daemon will fail to start, since we not created the default directory yet!**
+
+#### Set up the mindustry world
+
+Run the mindustry server:
+```bash
+java -jar /opt/mindustry/server.jar
+```
+
+Change the server config or rules, if you would like to.
+Then, create and save the world:
+```
+host MAPNAME MODE
+save world
+exit
+```
 
 #### Installing systemd service
 
