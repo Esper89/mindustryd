@@ -1,7 +1,5 @@
 # mindustryd
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/72cadff98c534291947b1ad3c3c93496)](https://app.codacy.com/app/marcsello/mindustryd?utm_source=github.com&utm_medium=referral&utm_content=marcsello/mindustryd&utm_campaign=Badge_Grade_Dashboard)
-
 Mindustry server daemonizer for systemd compatiblity
 
 ## What dis?
