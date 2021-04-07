@@ -39,8 +39,8 @@ You can follow the [guide on the mindustry wiki](https://mindustrygame.github.io
 
 Once downloaded, create the server directory and move the `server.jar` to it:
 ```bash
-sudo mkdir -p /srv/mindustryd
-sudo mv server.jar /srv/mindustryd/server.jar
+sudo mkdir -p /srv/mindustry
+sudo mv server.jar /srv/mindustry
 ```
 
 #### Basic setup
@@ -84,7 +84,7 @@ sudo nano /etc/mindustryd.json
                 
                 "startup_commands" : [ // commands to run, when the daemon is started up
                         "load world"
-                ]
+                ],
 
 
                 "shutdown_commands" : [ // commands to run, when the daemon is about to shutdown
@@ -115,7 +115,7 @@ Now we need an user, that runs the mindustry server, and a system group which me
 
 ```bash
 sudo groupadd -r mindustry
-sudo useradd -d "/srv/mindustry" -M -r -s /bin/false -g mindustry mindustry
+sudo useradd -d "/srv/mindustry" -M -r -g mindustry mindustry
 ```
 
 Set this user as the owner of the server directory:
@@ -141,9 +141,11 @@ sudo cp mindustryd.service.example /etc/systemd/system/mindustryd.service
 
 #### Set up the mindustry world
 
-Run the mindustry server directly:
+Run the mindustry server as the right user:
 ```bash
-java -jar /srv/mindustry/server.jar
+sudo su mindustry
+cd ~
+java -jar server.jar
 ```
 
 Change the server config or rules, if you would like to.
@@ -156,7 +158,7 @@ exit
 
 #### Start the daemon
 
-Enable and start the service:
+Exit the mindustry user with `exit` if you haven't already, then enable and start the service:
 ```bash
 sudo systemctl daemon-reload
 sudo systemctl enable mindustryd

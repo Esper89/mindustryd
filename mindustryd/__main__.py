@@ -33,6 +33,8 @@ def runDaemon(cfg):
 		logging.critical("Failed to start process: {}".format(str(e)))
 		return 1
 
+	pr.sendCommandList(cfg.startupCommands())
+
 	lp = LineProcessor(pr,cs,cfg.historyLen())
 	lp.start()
 
@@ -48,7 +50,7 @@ def runDaemon(cfg):
 			signal.signal(signal.SIGINT, signal.SIG_IGN) # ignore any further sigint, because the shutdown process is already started
 			logging.info("Stopping mindustry server...")
 			lp.passLine("Mindustryd: Daemon is shuttig down! Stopping mindustry server...\n")
-			pr.sendCommandList(cfg.shutdownCommands()) # should contain "stop"
+			pr.sendCommandList(cfg.shutdownCommands()) # should contain "exit"
 
 
 	signal.signal(signal.SIGINT, signal.SIG_IGN) # we are shutting down, so signals are ignored

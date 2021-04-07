@@ -46,7 +46,7 @@ class Config():
 
 		# then add the mindustry
 
-		cmd += ['-jar',self._cfg['server']['server_jar'],'nogui']
+		cmd += ['-jar',self._cfg['server']['server_jar']]
 
 		return cmd # done
 
@@ -72,6 +72,13 @@ class Config():
 		except KeyError:
 			return 24
 
+	def startupCommands(self):
+
+		try:
+			return self._cfg['server']['startup_commands']
+
+		except KeyError:
+			return []
 
 	def shutdownCommands(self):
 
@@ -79,4 +86,4 @@ class Config():
 			return self._cfg['server']['shutdown_commands']
 
 		except KeyError:
-			return ['stop']
+			return ['exit']

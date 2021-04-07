@@ -19,7 +19,7 @@
 
 		"startup_commands" : [
 			"load world"
-		]
+		],
 
 		"shutdown_commands" : [
 			"save world",
