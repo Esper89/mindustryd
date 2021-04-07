@@ -2,11 +2,11 @@
 from setuptools import setup
 
 setup(
-	name = 'minecraftd',
+	name = 'mindustryd',
 	version = '0.0.1',
-	packages = ['minecraftd'],
+	packages = ['mindustryd'],
 	entry_points = {
 		'console_scripts': [
-			'minecraftd = minecraftd.__main__:main'
+			'mindustryd = mindustryd.__main__:main'
 		]
 	})

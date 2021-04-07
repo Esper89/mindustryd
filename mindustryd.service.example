@@ -1,15 +1,15 @@
 [Unit]
-Description=Minecraft server daemon
+Description=Mindustry server daemon
 After=network-online.target
 
 [Service]
 Type=simple
-User=minecraft
-Group=minecraft
+User=mindustry
+Group=mindustry
 KillMode=process
 KillSignal=SIGINT
 
-ExecStart=/usr/local/bin/minecraftd --daemon
+ExecStart=/usr/local/bin/mindustryd --daemon
 
 [Install]
 WantedBy=multi-user.target

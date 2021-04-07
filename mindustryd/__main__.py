@@ -9,11 +9,11 @@ from .controlsocket import ControlSocket
 from .sessionclient import SessionClient
 from .config import Config
 
-CONFIG_FILE="/etc/minecraftd.json" # default
+CONFIG_FILE="/etc/mindustryd.json" # default
 
 def runDaemon(cfg):
 	logging.basicConfig(filename=cfg.logFilePath(), level=cfg.logLevel(), format="%(asctime)s - %(levelname)s: %(message)s")
-	logging.info("Minecraftd is starting...")
+	logging.info("Mindustryd is starting...")
 
 	try:
 		cs = ControlSocket(cfg.socketPath())
@@ -46,14 +46,14 @@ def runDaemon(cfg):
 
 		except KeyboardInterrupt: # SIGINT sends a "stop" command to the server, and it will shutdown greacefully (using Popen.wait to wait for termination would end up in deadlock, because we use stdin/stdout instead of communicate)
 			signal.signal(signal.SIGINT, signal.SIG_IGN) # ignore any further sigint, because the shutdown process is already started
-			logging.info("Stopping minecraft server...")
-			lp.passLine("Minecraftd: Daemon is shuttig down! Stopping minecraft server...\n")
+			logging.info("Stopping mindustry server...")
+			lp.passLine("Mindustryd: Daemon is shuttig down! Stopping mindustry server...\n")
 			pr.sendCommandList(cfg.shutdownCommands()) # should contain "stop"
 
 
 	signal.signal(signal.SIGINT, signal.SIG_IGN) # we are shutting down, so signals are ignored
 
-	logging.info("Minecraftd is shutting down...")
+	logging.info("Mindustryd is shutting down...")
 	lp.shutdown() # stops the thread and disconnects the user
 	lp.join() # wait for line processor to close, before closing the control socket
 	cs.close()
@@ -67,11 +67,11 @@ def attachSession(cfg):
 		sc = SessionClient(cfg.socketPath())
 
 	except (ConnectionRefusedError,FileNotFoundError):
-		print("Couldn't connect to Minecraftd console (is the daemon running?)")
+		print("Couldn't connect to Mindustryd console (is the daemon running?)")
 		return
 
 	except PermissionError:
-		print("You have no permission to attach to Minecraftd console")
+		print("You have no permission to attach to Mindustryd console")
 		return
 
 	try:
@@ -87,7 +87,7 @@ def main():
 
 
 	try:
-		config_file_to_load = os.environ['MINECRAFTD_CONFIG']
+		config_file_to_load = os.environ['MINDUSTRYD_CONFIG']
 	except KeyError: # environment variable is not set
 		config_file_to_load = CONFIG_FILE
 
@@ -101,7 +101,7 @@ def main():
 	if '--daemon' in sys.argv: # start daemon
 
 		rc = runDaemon(cfg)
-		sys.exit(rc) # the return code of minecraftd daemon is the return code of the minecraft server
+		sys.exit(rc) # the return code of mindustryd daemon is the return code of the mindustry server
 
 	else: # attach screen
 

@@ -21,7 +21,7 @@ class Config():
 
 
 		try:
-			lvl_str = self._cfg['minecraftd']['log_level']
+			lvl_str = self._cfg['mindustryd']['log_level']
 			return Config._loglevel_table[lvl_str] # this is a static table
 
 		except KeyError:
@@ -31,7 +31,7 @@ class Config():
 	def logFilePath(self):
 
 		try:
-			return self._cfg['minecraftd']['logfile']
+			return self._cfg['mindustryd']['logfile']
 
 		except KeyError:
 			return "" # default = no logfile
@@ -44,7 +44,7 @@ class Config():
 		# then we add the jvm arguments
 		cmd += self._cfg['server']['jvm_arguments']
 
-		# then add the minecraft
+		# then add the mindustry
 
 		cmd += ['-jar',self._cfg['server']['server_jar'],'nogui']
 
@@ -58,16 +58,16 @@ class Config():
 	def socketPath(self):
 
 		try: # using .get() would result in some similar uglyness, because of the two levels
-			return self._cfg['minecraftd']['console_socket_path']
+			return self._cfg['mindustryd']['console_socket_path']
 
 		except KeyError:
-			return "/var/lib/minecraftd/control.sock"
+			return "/var/lib/mindustryd/control.sock"
 
 
 	def historyLen(self):
 
 		try:
-			return self._cfg['minecraftd']['history_length']
+			return self._cfg['mindustryd']['history_length']
 
 		except KeyError:
 			return 24

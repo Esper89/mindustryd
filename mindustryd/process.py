@@ -2,7 +2,7 @@
 import subprocess
 import os
 
-# an instance of a minecraft server process
+# an instance of a mindustry server process
 class Process:
 
 	@staticmethod

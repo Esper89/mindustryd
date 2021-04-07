@@ -1,7 +1,7 @@
 {
 
 	"server": {
-		"server_path" : "/opt/minecraft",
+		"server_path" : "/opt/mindustry",
 		"server_jar" : "server.jar",
 		"java" : "java",
 
@@ -25,9 +25,9 @@
 
 	},
 
-	"minecraftd": {
+	"mindustryd": {
 		"logfile" : "",
-		"console_socket_path" : "/var/lib/minecraftd/control.sock",
+		"console_socket_path" : "/var/lib/mindustryd/control.sock",
 		"history_length" : 10,
 		"log_level" : "INFO"
 	}
