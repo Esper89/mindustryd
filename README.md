@@ -69,11 +69,16 @@ sudo nano /etc/mindustryd.json
                         "-Xms4G",
                         "-Xmx6G"
                 ],
+                
+                "startup_commands" : [ // commands to run, when the daemon is started up
+                        "load world"
+                ]
 
 
                 "shutdown_commands" : [ // commands to run, when the daemon is about to shutdown
-                        "save-all",
-                        "stop"
+                        "save world",
+                        "stop",
+                        "exit"
                 ]
 
         },

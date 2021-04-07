@@ -17,10 +17,14 @@
 			"-Xmx6G"
 		],
 
+		"startup_commands" : [
+			"load world"
+		]
 
 		"shutdown_commands" : [
-			"save-all",
-			"stop"
+			"save world",
+			"stop",
+			"exit"
 		]
 
 	},
