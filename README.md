@@ -15,7 +15,7 @@ Since google led me nowhere with this problem, I decided to write my own script 
 
 ## Features
 - Service like start/stop/restart of a mindustry server. No more screens and tmuxes
-- Easy to configure and run
+- Automatic startup and shutdown commands
 - Attachable/detachable console with unix permissions
 - Compatible with any flavour of mindustry server, or init system (example for systemd provided)
 
